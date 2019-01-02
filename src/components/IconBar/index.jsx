@@ -1,9 +1,8 @@
 import React from 'react'
 import PureRenderMixin from 'react-addons-pure-render-mixin'
-import HomeHeader from '../../components/HomeHeader'
-import List from './subpage/List'
+import { Icon, Flex } from 'antd-mobile'
 
-class Home extends React.Component {
+class IconBar extends React.Component {
   constructor(props, context) {
     super(props, context);
     this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
@@ -11,12 +10,11 @@ class Home extends React.Component {
   
   render() {
     return (
-      <div>
-        <HomeHeader />
-        <List />
-      </div>
+      <Flex justify="center" style={{padding: "10px 0"}}>
+        <Icon type={ this.props.type } />
+      </Flex>
     )
   }
 }
 
-export default Home
+export default IconBar

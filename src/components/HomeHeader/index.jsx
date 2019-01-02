@@ -1,9 +1,8 @@
 import React from 'react'
 import PureRenderMixin from 'react-addons-pure-render-mixin'
-import HomeHeader from '../../components/HomeHeader'
-import List from './subpage/List'
+import { NavBar, Icon } from 'antd-mobile';
 
-class Home extends React.Component {
+class HomeHeader extends React.Component {
   constructor(props, context) {
     super(props, context);
     this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
@@ -12,11 +11,15 @@ class Home extends React.Component {
   render() {
     return (
       <div>
-        <HomeHeader />
-        <List />
+        <NavBar
+          mode="dark"
+          rightContent={[
+            <Icon key="1" type="ellipsis" />,
+          ]}
+        >CNode社区</NavBar>
       </div>
     )
   }
 }
 
-export default Home
+export default HomeHeader
