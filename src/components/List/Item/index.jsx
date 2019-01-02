@@ -1,6 +1,9 @@
 import React from 'react'
 import PureRenderMixin from 'react-addons-pure-render-mixin'
 import { List, Badge, Flex  } from 'antd-mobile'
+import Icon from '../../Icon'
+
+import './style.less'
 
 const Item = List.Item
 const Brief = Item.Brief;
@@ -25,8 +28,13 @@ class ItemComponent extends React.Component {
         </Brief>
         <Brief>
           <Flex direction="row" justify="between">
-            <span>{data.author.loginname}</span>
-            <span>{data.reply_count} / {data.visit_count}</span>
+            <span className="icon-box">
+              <Icon type="user" />&nbsp;{data.author.loginname}
+            </span>
+            <span className="icon-box">
+              <Icon type="comment" />&nbsp;{data.reply_count}&nbsp;|&nbsp;
+              <Icon type="scan" />&nbsp;{data.visit_count}
+            </span>
           </Flex>
         </Brief>
       </div>

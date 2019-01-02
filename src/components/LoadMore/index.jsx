@@ -11,7 +11,7 @@ class LoadMore extends React.Component {
   render() {
     return (
       <div ref="wrapper">
-        <Icon type={ this.props.isLoadingMore ? 'loading' : 'down' } />
+        <Icon type={ this.props.isLoadingMore ? 'loading' : 'loadit' } />
       </div>
     )
   }

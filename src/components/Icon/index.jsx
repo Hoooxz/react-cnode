@@ -1,9 +1,10 @@
 import React from 'react'
 import PureRenderMixin from 'react-addons-pure-render-mixin'
-import { Flex } from 'antd-mobile'
-import Icon from '../Icon'
+import IcoMoon from 'react-icomoon';
 
-class IconBar extends React.Component {
+import { getIconName } from '../../config/icon'
+
+class Icon extends React.Component {
   constructor(props, context) {
     super(props, context);
     this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
@@ -11,11 +12,9 @@ class IconBar extends React.Component {
   
   render() {
     return (
-      <Flex justify="center" style={{padding: "10px 0"}}>
-        <Icon type={ this.props.type } />
-      </Flex>
+      <IcoMoon icon={getIconName(this.props.type)} />
     )
   }
 }
 
-export default IconBar
+export default Icon
