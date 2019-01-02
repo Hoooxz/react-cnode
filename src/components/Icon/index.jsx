@@ -4,6 +4,8 @@ import IcoMoon from 'react-icomoon';
 
 import { getIconName } from '../../config/icon'
 
+import './style.less'
+
 class Icon extends React.Component {
   constructor(props, context) {
     super(props, context);
@@ -11,8 +13,13 @@ class Icon extends React.Component {
   }
   
   render() {
+    const iconName = getIconName(this.props.type)
+    const spinFlag = this.props.type === 'loading'
     return (
-      <IcoMoon icon={getIconName(this.props.type)} />
+      <IcoMoon
+        className={ spinFlag ? 'spin' : ''}
+        icon={iconName}
+      />
     )
   }
 }
