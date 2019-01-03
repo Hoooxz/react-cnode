@@ -20,7 +20,10 @@ class ItemComponent extends React.Component {
     // 渲染一条文章
     const ItemContent = (
       <div>
-        { data.top ? <Badge text="置顶" style={{ padding: '0 3px', backgroundColor: '#f19736', borderRadius: 2 }} /> : ''}
+        { data.top || data.good
+          ? <Badge text={ data.top ? '置顶' : '精华'} style={{ padding: '0 3px', backgroundColor: '#f19736', borderRadius: 2 }} />
+          : ''
+        }
         &nbsp;
         {data.title}
         <Brief>

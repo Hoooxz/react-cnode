@@ -10,10 +10,11 @@ class Home extends React.Component {
   }
   
   render() {
+    const topic = this.props.match.params.topic ? this.props.match.params.topic : 'all'
     return (
       <div>
-        <HomeHeader />
-        <List />
+        <HomeHeader topic={topic} />
+        <List topic={topic} />
       </div>
     )
   }

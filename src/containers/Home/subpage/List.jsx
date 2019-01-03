@@ -42,7 +42,8 @@ class List extends React.Component {
 
   // 获取首屏数据
   async loadFirstPageData () {
-    const listData = await getList('all', 1, PER_PAGE_LIMIT)
+    const topic = this.props.topic
+    const listData = await getList(topic, 1, PER_PAGE_LIMIT)
     this.resultHandle(listData)
   }
 
@@ -52,8 +53,9 @@ class List extends React.Component {
     this.setState({
       isLoadingMore: true
     })
+    const topic = this.props.topic
     const page = this.state.page  // 下一页的页码
-    const listData = await getList('all', page, PER_PAGE_LIMIT)
+    const listData = await getList(topic, page, PER_PAGE_LIMIT)
     this.resultHandle(listData)
 
     // 增加 page 计数
