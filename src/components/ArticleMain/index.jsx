@@ -1,6 +1,7 @@
 import React from 'react'
 import PureRenderMixin from 'react-addons-pure-render-mixin'
 import Info from './subComp/Info'
+import Content from '../Content'
 
 import './style.less'
 
@@ -16,7 +17,7 @@ class ArticleMain extends React.Component {
       <div>
         <h2 className="article-title">{data.title}</h2>
         <Info data={data} />
-        <div dangerouslySetInnerHTML = {{ __html: data.content }} />
+        <Content content={data.content} />
       </div>
     )
   }

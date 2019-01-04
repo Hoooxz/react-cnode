@@ -7,7 +7,9 @@ let iconPair = {
   comment: 'bubble2',
   loading: 'spinner2',
   menu: 'menu',
-  smile: 'smile',
+  thumb: 'smile2',
+  'thumb-o': 'smile',
+  reply: 'undo2',
   scan: 'eye',
   loadit: 'flickr2',
   star: 'star-full',
@@ -16,5 +18,5 @@ let iconPair = {
 
 export function getIconName(customName) {
   let originalName = iconPair[customName]
-  return originalName ? originalName : 'smile'
+  return originalName ? originalName : 'info'
 }

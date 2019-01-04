@@ -3,6 +3,7 @@ import PureRenderMixin from 'react-addons-pure-render-mixin'
 import { WingBlank } from 'antd-mobile'
 import IconBar from '../../../components/IconBar'
 import Main from '../../../components/ArticleMain'
+import CommentList from '../../../components/ArticleCommentList'
 
 import { getArticleDetail } from '../../../fetch/article/article'
 
@@ -25,6 +26,10 @@ class Detail extends React.Component {
           ? <IconBar type="loading" />
           : <WingBlank size="md">
               <Main data={data} />
+              <CommentList
+                comments={data.replies}
+                articleId={data.id}
+              />
             </WingBlank>
         }
       </div>
@@ -37,7 +42,6 @@ class Detail extends React.Component {
 
   async loadArticleDetail(id) {
     let data = await getArticleDetail(id)
-    console.log(data)
     this.setState({
       data,
       isLoading: false
