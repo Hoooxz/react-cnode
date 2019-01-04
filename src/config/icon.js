@@ -10,6 +10,8 @@ let iconPair = {
   smile: 'smile',
   scan: 'eye',
   loadit: 'flickr2',
+  star: 'star-full',
+  'star-o': 'star-empty',
 }
 
 export function getIconName(customName) {

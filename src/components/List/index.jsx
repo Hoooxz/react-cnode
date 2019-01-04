@@ -16,7 +16,7 @@ class ListComponent extends React.Component {
           {
             this.props.data.map((item, index)=> {
               return (
-                <Item key={index} data={item} />
+                <Item key={index} data={item} clickHandle={this.props.clickHandle} />
               )
             })
           }

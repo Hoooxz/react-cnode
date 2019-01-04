@@ -1,7 +1,8 @@
 import React from 'react'
 import PureRenderMixin from 'react-addons-pure-render-mixin'
-import { List, Badge, Flex  } from 'antd-mobile'
+import { List, Flex } from 'antd-mobile'
 import Icon from '../../Icon'
+import Label from '../../Label'
 
 import './style.less'
 
@@ -19,12 +20,11 @@ class ItemComponent extends React.Component {
     const data = this.props.data
     // 渲染一条文章
     const ItemContent = (
-      <div>
+      <div onClick={this.clickArticleHandle.bind(this)}>
         { data.top || data.good
-          ? <Badge text={ data.top ? '置顶' : '精华'} style={{ padding: '0 3px', backgroundColor: '#f19736', borderRadius: 2 }} />
+          ? <Label text={ data.top ? '置顶' : '精华'} type='top' />
           : ''
         }
-        &nbsp;
         {data.title}
         <Brief>
           {data.content.replace(/<[^>]+>/g,"")}
@@ -48,6 +48,12 @@ class ItemComponent extends React.Component {
         {ItemContent}
       </Item>
     )
+  }
+
+  clickArticleHandle() {
+    const clickHandle = this.props.clickHandle
+    const article = this.props.data
+    clickHandle(article.id)
   }
 }
 

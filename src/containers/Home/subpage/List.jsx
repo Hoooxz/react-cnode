@@ -1,5 +1,6 @@
 import React from 'react'
 import PureRenderMixin from 'react-addons-pure-render-mixin'
+import { withRouter } from 'react-router-dom'
 import ListComponent from '../../../components/List'
 import LoadMore from '../../../components/LoadMore'
 import Icon from '../../../components/IconBar'
@@ -24,7 +25,7 @@ class List extends React.Component {
       <div>
         {
           this.state.data.length
-          ? <ListComponent data={this.state.data}/>
+          ? <ListComponent data={this.state.data} clickHandle={this.clickArticleHandle.bind(this)} />
           : <Icon type="loading" />
         }
         {
@@ -76,6 +77,11 @@ class List extends React.Component {
     })
   }
 
+  // 点击了一篇文章
+  clickArticleHandle(id) {
+    this.props.history.push('/article/' + id)
+  }
+
 }
 
-export default List
+export default withRouter(List)
