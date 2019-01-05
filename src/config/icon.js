@@ -7,6 +7,7 @@ let iconPair = {
   comment: 'bubble2',
   loading: 'spinner2',
   menu: 'menu',
+  back: 'arrow-left2',  /** 导航条上的返回（左箭头） */
   thumb: 'smile2',
   'thumb-o': 'smile',
   reply: 'undo2',
@@ -14,6 +15,16 @@ let iconPair = {
   loadit: 'flickr2',
   star: 'star-full',
   'star-o': 'star-empty',
+  /** for topics in Drawer */
+  all: 'home2',
+  good: 'point-up',
+  share: 'share2',
+  ask: 'magic-wand',
+  job: 'briefcase',
+  /** for funcs in Drawer */
+  mesg: 'bullhorn',
+  setting: 'cog',
+  about: 'notification',
 }
 
 export function getIconName(customName) {
