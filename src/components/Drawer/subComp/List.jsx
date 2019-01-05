@@ -23,14 +23,21 @@ class ListComponent extends React.Component {
               ? <img src={item.avatar} alt={item.text} style={{borderRadius: '50%'}} />
               : <Icon type={item.icon}
             />}
-            style={ item.selected ? {backgroundColor: '#ddd'} : {}}
-            onClick={() => {}}
+            onClick={this.clickHandle.bind(this, item.router)}
+            extra={ item.selected === true ? '√' : ''}
             key={index}
           >{item.text}</Item>
         })
       }
       </List>
     )
+  }
+
+  clickHandle(router) {
+    if(!router) {
+      router = '/'
+    }
+    this.props.clickHandle(router)
   }
 }
 

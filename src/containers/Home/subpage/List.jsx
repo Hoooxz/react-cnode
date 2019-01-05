@@ -8,16 +8,18 @@ import Icon from '../../../components/IconBar'
 import { PER_PAGE_LIMIT } from '../../../constants/list'
 import { getList } from '../../../fetch/Home/list'
 
+const initialState = {
+  data: [],             // 存储列表信息
+  hasMore: false,       // 记录当前状态下还有无更多的数据可供加载
+  isLoadingMore: false, // 记录当前状态下，是“加载中”还是“点击加载更多”
+  page: 1               // 下一页的页码
+}
+
 class List extends React.Component {
   constructor(props, context) {
     super(props, context);
     this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
-    this.state = {
-      data: [],             // 存储列表信息
-      hasMore: false,       // 记录当前状态下还有无更多的数据可供加载
-      isLoadingMore: false, // 记录当前状态下，是“加载中”还是“点击加载更多”
-      page: 1               // 下一页的页码
-    }
+    this.state = initialState
   }
   
   render() {
@@ -38,6 +40,16 @@ class List extends React.Component {
   }
 
   componentDidMount() {
+    this.loadFirstPageData()
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if(this.props.topic === prevProps.topic) {
+      return
+    }
+    // 重置数据
+    this.setState(initialState)
+    // 根据新的主题重新加载数据
     this.loadFirstPageData()
   }
 

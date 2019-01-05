@@ -10,7 +10,12 @@ class Drawer extends React.Component {
   
   render() {
     return (
-      <DrawerComponent isOpen={this.props.isOpen} closeHandle={this.props.closeHandle} />
+      <DrawerComponent
+        topic={this.props.topic}
+        isOpen={this.props.isOpen}
+        closeHandle={this.props.closeHandle}
+        clickHandle={this.props.clickHandle}
+      />
     )
   }
 }
