@@ -4,6 +4,7 @@ import { Drawer } from 'antd-mobile'
 import List from './subComp/List'
 
 import './style.less'
+import AvatarDefault from '../../static/image/avatar_default.png'
 
 function toggleBodyScroll(scroll) {
   document.body.style.overflow = scroll ? 'auto' : 'hidden'
@@ -14,9 +15,11 @@ class DrawerComponent extends React.Component {
     super(props, context);
     this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
     this.state = {
-      userInfo: [
-        { text: 'hoooxz', avatar: 'http://hooxz.com/images/avatar.jpg' },
-      ],
+      userInfo: {
+        text: '请登陆',
+        avatar: AvatarDefault,
+        router: '/login'
+      },
       topics: [
         { text: '全部', topic: 'all',   icon: 'all',   router:'/', selected: true },
         { text: '精华', topic: 'good',  icon: 'good',  router:'/topic/good' },
@@ -35,7 +38,7 @@ class DrawerComponent extends React.Component {
   render() {
     const sidebar = (
       <div>
-        <List title="当前用户" list={this.state.userInfo} clickHandle={this.clickHandle.bind(this)} />
+        <List title="当前用户" list={ [this.state.userInfo] } clickHandle={this.clickHandle.bind(this)} />
         <List title="分类" list={this.state.topics} clickHandle={this.clickHandle.bind(this)} />
         <List title="我的" list={this.state.funcs} clickHandle={this.clickHandle.bind(this)} />
       </div>
@@ -81,6 +84,21 @@ class DrawerComponent extends React.Component {
     this.refreshTopicSelected(this.props.topic)
   }
 
+  setUserInfo() {
+    const userInfo = this.props.userInfo
+    if(!userInfo.loginname) {
+      return;
+    }
+    
+    this.setState({
+      userInfo: {
+        text: userInfo.loginname,
+        avatar: userInfo.avatar_url,
+        router: '/user'
+      }
+    })
+  }
+
   componentDidUpdate(prevProps, prevState) {
     if(!this.props.isOpen && prevProps.isOpen) {
       // 新的状态为关，旧的状态为开
@@ -92,6 +110,11 @@ class DrawerComponent extends React.Component {
     }
     if(this.props.topic !== prevProps.topic) {
       this.refreshTopicSelected(this.props.topic)
+    }
+
+    // 若发生改变，则将用户信息拷贝进state
+    if(prevProps.userInfo.loginname !== this.props.userInfo.loginname) {
+      this.setUserInfo()
     }
   }
 

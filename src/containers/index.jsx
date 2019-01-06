@@ -5,6 +5,7 @@ import { Switch, Route, BrowserRouter } from 'react-router-dom'
 import Home from './Home'
 import Article from './Article'
 import User from './User'
+import Login from './Login'
 import About from './User'
 import NotFound from './404'
 
@@ -23,6 +24,7 @@ class App extends React.Component {
             <Route path="/topic/:topic" component={Home} />
             <Route path="/article/:id" component={Article} />
             <Route path="/user" component={User} />
+            <Route path="/login" component={Login} />
             <Route path="/about" component={About} />
             <Route component={NotFound} />
           </Switch>

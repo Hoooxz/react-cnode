@@ -16,6 +16,21 @@ let get = (url, params) => {
   })
 }
 
+let post = (url, data) => {
+  return new Promise((resolve, reject) => {
+    axios.post(url, data).then(res => {
+      if(res.status === 200 && res.data.success === true) {
+        resolve(res.data)
+      } else {
+        reject('HTTP Post Response: Error.')
+      }
+    }).catch(err => {
+      reject(err)
+    })
+  })
+}
+
 export {
-  get
+  get,
+  post
 }
