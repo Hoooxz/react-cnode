@@ -15,7 +15,7 @@ class Item extends React.Component {
     const {comment} = this.props
     return (
       <div className="comment-item">
-        <Info className="comment-info" comment={comment} />
+        <Info className="comment-info" comment={comment} upToggleHandle={this.props.upToggleHandle} />
         {
           comment.reply_floor
           ? <div className="comment-reply-floor">回复: {comment.reply_floor}楼</div>

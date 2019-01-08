@@ -5,7 +5,8 @@ import IconBar from '../../../components/IconBar'
 import Main from '../../../components/ArticleMain'
 import CommentList from '../../../components/ArticleCommentList'
 
-import { getArticleDetail } from '../../../fetch/article/article'
+import LocalStore from '../../../utils/localStore'
+import { getArticleDetail, upCommentToggle } from '../../../fetch/article/article'
 
 class Detail extends React.Component {
   constructor(props, context) {
@@ -14,6 +15,7 @@ class Detail extends React.Component {
     this.state = {
       data: {},  // 文章详情
       isLoading: true,  // 是否正在加载文章详情
+      token: '', // 用户 token
     }
   }
   
@@ -29,6 +31,7 @@ class Detail extends React.Component {
               <CommentList
                 comments={data.replies}
                 articleId={data.id}
+                upToggleHandle={this.upToggleHandle.bind(this)}
               />
             </WingBlank>
         }
@@ -37,15 +40,28 @@ class Detail extends React.Component {
   }
 
   componentDidMount() {
-    this.loadArticleDetail(this.props.articleId)
+    let token = LocalStore.getItem('accessToken')
+    this.setState({
+      token 
+    })
+    this.loadArticleDetail(this.props.articleId, token)
   }
 
-  async loadArticleDetail(id) {
-    let data = await getArticleDetail(id)
+  async loadArticleDetail(id, token) {
+    let data = await getArticleDetail(id, token)
     this.setState({
       data,
       isLoading: false
     })
+  }
+
+  async upToggleHandle(commentId) {
+    try {
+      let res = await upCommentToggle(commentId, this.state.token)
+      return res.action
+    } catch(err) {
+      return ''
+    }
   }
 }
 

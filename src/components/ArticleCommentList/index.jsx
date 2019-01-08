@@ -30,7 +30,7 @@ class CommentList extends React.Component {
       if(comment.reply_id) {
         comment.reply_floor = getFloorById(comments, comment.reply_id) + 1
       }
-      return <Item key={index} comment={comment} />
+      return <Item key={index} comment={comment} upToggleHandle={this.props.upToggleHandle} />
     })
     return (
       <div>

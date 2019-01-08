@@ -11,13 +11,25 @@ class Info extends React.Component {
   constructor(props, context) {
     super(props, context);
     this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
+    this.state = {
+      is_uped: false,
+      ups: [],
+      canUpToggle: true
+    }
+  }
+
+  componentDidMount() {
+    this.setState({
+      is_uped: this.props.comment.is_uped,
+      ups: this.props.comment.ups
+    })
   }
   
   render() {
     // 获取基本信息
     const { 
       author: {avatar_url, loginname}, 
-      create_at, is_uped, floor, ups
+      create_at, floor,
     } = this.props.comment
 
     const createDate = getDateDiff(create_at)
@@ -47,13 +59,45 @@ class Info extends React.Component {
           </div>
           <div className="comment-info-right">
             {/* 点赞数：若自己已点赞，显示实心笑脸；否则为空心 */}
-            <Icon type={ is_uped ? 'thumb' : 'thumb-o'} />&nbsp;{ups.length} &nbsp;
+            <div className="comment-info-right-up" onClick={this.upToggleHandle.bind(this)}>
+              <Icon
+                type={ this.state.is_uped ? 'thumb' : 'thumb-o'}
+              />&nbsp;{this.state.ups.length} &nbsp;
+            </div>
             {/* 回复该评论 */}
             <Icon type='reply' />
           </div>
         </Flex>
       </div>
     )
+  }
+
+  async upToggleHandle() {
+    // 避免重复点击
+    if(!this.state.canUpToggle) {
+      return
+    }
+    this.setState({
+      canUpToggle: false
+    })
+
+    const commentId = this.props.comment.id
+    let up = await this.props.upToggleHandle(commentId)
+    if(!up) {
+      return
+    } else if(up === 'up') {
+      this.setState({
+        is_uped: true,
+        ups: this.state.ups.concat(['']),
+        canUpToggle: true
+      })
+    } else {
+      this.setState({
+        is_uped: false,
+        ups: this.state.ups.slice(0, this.state.ups.length - 1),
+        canUpToggle: true
+      })
+    }
   }
 }
 
