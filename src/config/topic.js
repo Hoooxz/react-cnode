@@ -6,6 +6,7 @@ let topicPair = {
   share: '分享',
   job: '招聘',
   good: '精华',
+  dev: '开发'
 }
 
 export function getTopicName(topic) {

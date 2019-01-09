@@ -1,6 +1,6 @@
 import { get } from '../http'
 
-let topics = ['ask', 'share', 'job', 'good']
+let topics = ['ask', 'share', 'job', 'good', 'dev']
 
 let getList = (topic, page, limit) => {
   return new Promise((resolve, reject) => {

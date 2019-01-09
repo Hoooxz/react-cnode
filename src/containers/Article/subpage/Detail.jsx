@@ -4,9 +4,10 @@ import { WingBlank } from 'antd-mobile'
 import IconBar from '../../../components/IconBar'
 import Main from '../../../components/ArticleMain'
 import CommentList from '../../../components/ArticleCommentList'
+import CommentForm from '../../../components/CommentForm'
 
 import LocalStore from '../../../utils/localStore'
-import { getArticleDetail, upCommentToggle } from '../../../fetch/article/article'
+import { getArticleDetail, upCommentToggle, postComment } from '../../../fetch/article/article'
 
 class Detail extends React.Component {
   constructor(props, context) {
@@ -35,6 +36,7 @@ class Detail extends React.Component {
               />
             </WingBlank>
         }
+        <CommentForm commentHandle={this.commentHandle.bind(this)} />
       </div>
     )
   }
@@ -61,6 +63,19 @@ class Detail extends React.Component {
       return res.action
     } catch(err) {
       return ''
+    }
+  }
+
+  async commentHandle(comment, commentId) {
+    let res = await postComment(this.props.articleId, this.state.token, comment, commentId)
+    if(res.success) {
+      let data = await getArticleDetail(this.props.articleId, this.state.token)
+      this.setState({
+        data
+      })
+      return true
+    } else {
+      return false
     }
   }
 }

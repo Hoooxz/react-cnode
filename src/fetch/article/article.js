@@ -26,7 +26,26 @@ let upCommentToggle = (commentId, token) => {
   })
 }
 
+let postComment = (articleId, token, content, commentId) => {
+  return new Promise((resolve, reject) => {
+    let data = {
+      accesstoken: token,
+      content,
+    }
+    if(commentId) {
+      data.reply_id = commentId
+    }
+    post(`https://cnodejs.org/api/v1//topic/${articleId}/replies`, data)
+    .then(res => {
+      resolve(res)
+    }).catch(err => {
+      reject(err)
+    })
+  })
+}
+
 export {
   getArticleDetail,
   upCommentToggle,
+  postComment
 }
